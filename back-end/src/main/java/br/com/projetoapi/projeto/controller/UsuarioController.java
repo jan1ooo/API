@@ -3,6 +3,7 @@ package br.com.projetoapi.projeto.controller;
 import br.com.projetoapi.projeto.DAO.IUsuario;
 import br.com.projetoapi.projeto.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,27 +18,27 @@ public class UsuarioController {
     private IUsuario dao;
 
     @GetMapping
-    public List<Usuario> listaUsuarios (){
-        return (List<Usuario>) dao.findAll();
+    public ResponseEntity<List<Usuario>> listaUsuarios (){
+        List<Usuario> lista = (List<Usuario>) dao.findAll();
+        return ResponseEntity.status(200).body(lista);
     }
 
     @PostMapping
-    public Usuario criarUsurio (@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> criarUsurio (@RequestBody Usuario usuario){
         Usuario usuarioNovo = dao.save(usuario);
-        return usuarioNovo;
+        return ResponseEntity.status(201).body(usuarioNovo);
     }
 
     @PutMapping
-    public Usuario editarUsurio (@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario>  editarUsurio (@RequestBody Usuario usuario){
         Usuario usuarioNovo = dao.save(usuario);
-        return usuarioNovo;
+        return ResponseEntity.status(201).body(usuarioNovo);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<Usuario> excluirUsuario(@PathVariable Integer id){
-        Optional<Usuario> usuario = dao.findById(id);
+    public ResponseEntity<?> excluirUsuario(@PathVariable Integer id){
         dao.deleteById(id);
-        return usuario;
+        return ResponseEntity.status(204).build();
     }
 
 }
