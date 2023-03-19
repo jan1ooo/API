@@ -16,7 +16,7 @@ public class SecurityConfig {
     public DefaultSecurityFilterChain configure(HttpSecurity httpSec) throws Exception {
         httpSec.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/usuarios")
+                .requestMatchers(HttpMethod.POST, "/usuarios/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

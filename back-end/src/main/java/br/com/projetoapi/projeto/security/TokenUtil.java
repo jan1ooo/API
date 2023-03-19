@@ -23,7 +23,7 @@ public class TokenUtil {
      private static final String SECRET_KEY = "BOQRGoow!6r55W@n8PYQ0b1hmPe@rIE1";
      private static final String EMISSOR = "jan1ooo";
 
-     private static String createToken(Usuario usuario){
+     public static String createToken(Usuario usuario){
          Key secretKey = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
          String token = Jwts.builder()
